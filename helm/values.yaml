@@ -1,0 +1,4 @@
+gameSavedDir: /mnt/palworld-saved
+loadBalancePort: 8211
+loadBalanceRconPort: 25575
+enableRcon: false
