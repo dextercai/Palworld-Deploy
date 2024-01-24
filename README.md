@@ -4,6 +4,31 @@
 
 幻兽帕鲁服务端搭建
 
+# 帕鲁 · 启动！
+
+以下内容保存为脚本，可用于快速启动服务端。存档文件位于`saved_game`文件夹内，便于备份。
+
+```bash
+#!/bin/bash
+file_path=`readlink -f $0`
+dir_path=`dirname $file_path`
+
+sudo docker stop palworld_server
+sudo docker rm palworld_server
+
+sudo docker pull dextercai/palworld_server:x86_latest
+
+sudo docker run -it \
+     --name palworld_server --restart always \
+     -p 8211:8211/udp \
+     -v ${dir_path}/saved_game/:/home/steam/Steam/steamapps/common/PalServer/Pal/Saved/ \
+     -d dextercai/palworld_server:x86_latest \
+     /home/steam/Steam/steamapps/common/PalServer/PalServer.sh -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS
+
+```
+
+# 以下内容适用于具有一定运维能力的用户
+
 ## x86 Image
 
 服务端启动：`/home/steam/Steam/steamapps/common/PalServer/PalServer.sh`
